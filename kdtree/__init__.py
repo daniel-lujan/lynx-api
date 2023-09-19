@@ -22,11 +22,19 @@ class Node:
 class KDTree:
     def __init__(
             self,
-            points : Iterable[SupportsIndex]) -> None:
+            points : Iterable[SupportsIndex],
+            ignore_first_axis : bool = False) -> None:
+        
         if len(points) == 0:
             raise ValueError("Points must not be empty")
         
+        if ignore_first_axis:
+            self.dimensions = len(points[0]) - 1
+        else:
+            self.dimensions = len(points[0])
+        self.ignore_first_axis = ignore_first_axis
         self.root = self.__build(points)
+
     
     def __build(
             self,
@@ -37,7 +45,7 @@ class KDTree:
         if len(points) == 0:
             return None
         
-        axis = depth % len(points[0])
+        axis = self.__get_axis(depth)
         sorted_points = sorted(points, key=lambda point: point[axis])
         median = len(points) // 2
         mp = sorted_points[median]
@@ -47,6 +55,12 @@ class KDTree:
             depth,
             left = self.__build(sorted_points[:median], depth + 1),
             right = self.__build(sorted_points[median + 1:], depth + 1))
+
+    def __get_axis(self, depth: int) -> int:
+        if self.ignore_first_axis:
+            return (depth % self.dimensions) + 1
+        else:
+            return depth % self.dimensions
 
     @staticmethod
     def __recursive_search(
@@ -60,7 +74,7 @@ class KDTree:
         if np.array_equal(point, node.point):
             return node
 
-        axis = depth % len(point)
+        axis = node.depth % len(point)
 
         if point[axis] < node.point[axis]:
             found = KDTree.__recursive_search(
@@ -84,16 +98,16 @@ class KDTree:
         
         return self.__recursive_search(point, self.root)
     
-    @staticmethod
-    def distance_sqr(a: Iterable, b: Iterable) -> float:
-        return sum((x1 - x2) ** 2 for x1, x2 in zip(a, b))
+    def distance_sqr(self, a: Iterable, b: Iterable) -> float:
+        if self.ignore_first_axis:
+            return np.sum(np.square(np.delete(a, 0) - np.delete(b, 0)))
+        else:
+            return np.sum(np.square(a - b))
 
-    @staticmethod
-    def distance(a: Iterable, b: Iterable) -> float:
-        return np.sqrt(sum((x1 - x2) ** 2 for x1, x2 in zip(a, b)))
+    def distance(self, a: Iterable, b: Iterable) -> float:
+        return np.sqrt(self.distance_sqr(a, b))
 
     def nearest_neighbor(self, target: SupportsIndex) -> Node:
-        k = len(target)
         best : Node = None
         def search(node: Node, depth: int = 0):
             nonlocal best
@@ -101,13 +115,13 @@ class KDTree:
             if node is None:
                 return
             
-            distance = KDTree.distance_sqr(node.point, target)
-            best_distance = KDTree.distance_sqr(best.point, target) if best is not None else float('inf')
+            distance = self.distance_sqr(node.point, target)
+            best_distance = self.distance_sqr(best.point, target) if best is not None else float('inf')
             
             if distance < best_distance and not all(node.point == target):
                 best = node
             
-            axis = depth % k
+            axis = self.__get_axis(depth)
             diff = target[axis] - node.point[axis]
             if diff <= 0:
                 close, away = node.left, node.right
