@@ -26,7 +26,7 @@ def form_to_point(form_data: dict) -> list:
     point = []
 
     point.append(form_data["_id"])
-    point.append(one_hot_encode(form_data["favMusicGenres"], ALLOWED_MUSIC_GENRES))
+    point += one_hot_encode(form_data["favMusicGenres"], ALLOWED_MUSIC_GENRES)
     point.append(form_data["moviesTaste"])
     # ...
 
