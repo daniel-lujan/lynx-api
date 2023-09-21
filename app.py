@@ -13,7 +13,8 @@ from schemas.validator import validate_json
 
 app = Flask(__name__)
 
-@app.route("/form", methods = ["POST"])
+
+@app.route("/form", methods=["POST"])
 @validate_json(Form)
 def new_form():
     """Inserts a new form into the database.
@@ -24,10 +25,10 @@ def new_form():
         403: Email not allowed.
         409: Form already exists.
     """
-    
+
     if request.json["email"] not in ALLOWED_EMAILS:
-        return Response(status = 403)
-    
+        return Response(status=403)
+
     form = request.json
     form["_id"] = form["email"].lower()
     del form["email"]
@@ -35,9 +36,10 @@ def new_form():
     try:
         forms.insert_one(form)
     except DuplicateKeyError:
-        return Response(status = 409)
+        return Response(status=409)
 
-    return Response(status = 200)
+    return Response(status=200)
+
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug=True)
