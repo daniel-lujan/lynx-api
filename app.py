@@ -6,7 +6,7 @@ if __name__ == "__main__":
 from flask import Flask, Response, request
 from pymongo.errors import DuplicateKeyError
 
-from config import ALLOWED_EMAILS, PORT
+from config import PORT
 from database import forms
 from schemas import Form
 from schemas.validator import validate_json
@@ -22,12 +22,8 @@ def new_form():
     Responses:
         200: Form inserted successfully.
         400: Invalid JSON.
-        403: Email not allowed.
         409: Form already exists.
     """
-
-    if request.json["email"] not in ALLOWED_EMAILS:
-        return Response(status=403)
 
     form = request.json
     form["_id"] = form["email"].lower()
