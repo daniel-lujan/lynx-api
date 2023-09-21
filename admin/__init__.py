@@ -9,6 +9,12 @@ admin = Blueprint("admin", __name__, url_prefix="/admin")
 
 @admin.route("/calculate")
 def calculate():
+    """Calculates the best match for each form.
+
+    Responses:
+        200: Calculated successfully.
+    """
+
     points = []
 
     forms = db.forms.find({})
