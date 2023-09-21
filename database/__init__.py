@@ -7,3 +7,4 @@ db = client[DATABASE_NAME]
 
 forms = db["forms"]
 motels = db["motels"]
+results = db["results"]
