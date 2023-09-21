@@ -6,7 +6,7 @@ if __name__ == "__main__":
 from flask import Flask, Response, request
 from pymongo.errors import DuplicateKeyError
 
-from config import ALLOWED_EMAILS
+from config import ALLOWED_EMAILS, PORT
 from database import forms
 from schemas import Form
 from schemas.validator import validate_json
@@ -42,4 +42,4 @@ def new_form():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=PORT, debug=True)
