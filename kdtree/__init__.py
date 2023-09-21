@@ -81,12 +81,18 @@ class KDTree:
 
     def distance_sqr(self, a: Iterable, b: Iterable) -> float:
         if self.ignore_first_axis:
-            return np.sum(np.square(np.delete(a, 0) - np.delete(b, 0)))
+            return np.sum(np.square(np.subtract(a[1:], b[1:])))
         else:
             return np.sum(np.square(a - b))
 
     def distance(self, a: Iterable, b: Iterable) -> float:
         return np.sqrt(self.distance_sqr(a, b))
+
+    def check_equal(self, a: Iterable, b: Iterable) -> bool:
+        if self.ignore_first_axis:
+            return np.array_equal(a[1:], b[1:])
+        else:
+            return np.array_equal(a, b)
 
     def nearest_neighbor(self, target: SupportsIndex) -> Node:
         best: Node = None
@@ -104,7 +110,7 @@ class KDTree:
                 else float("inf")
             )
 
-            if distance < best_distance and not all(node.point == target):
+            if distance < best_distance and not self.check_equal(node.point, target):
                 best = node
 
             axis = self.__get_axis(depth)
