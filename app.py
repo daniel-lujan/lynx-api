@@ -6,12 +6,15 @@ if __name__ == "__main__":
 from flask import Flask, Response, request
 from pymongo.errors import DuplicateKeyError
 
+from admin import admin
 from config import PORT
 from database import forms
 from schemas import Form
 from schemas.validator import validate_json
 
 app = Flask(__name__)
+
+app.register_blueprint(admin)
 
 
 @app.route("/form", methods=["POST"])
