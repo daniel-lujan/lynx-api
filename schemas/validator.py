@@ -17,5 +17,4 @@ def validate_json(schema: type[Schema]):
         
         return wrapper
     
-    return decorator    
     return decorator

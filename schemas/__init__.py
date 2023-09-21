@@ -1,5 +1,7 @@
 from marshmallow import Schema, fields, validate
 
+from schemas.constants import ALLOWED_MUSIC_GENRES
+
 
 class Form(Schema):
     email = fields.Email(required = True)
@@ -7,7 +9,7 @@ class Form(Schema):
     age = fields.Integer(required = True, validate = validate.Range(min = 1))
     gender = fields.String(validate = validate.OneOf(("f", "m")))
     favMusicGenres = fields.List(
-        fields.String(validate = validate.OneOf(("Reggaeton", "Pop", "Rap", "Rock"))),
+        fields.String(validate = validate.OneOf(ALLOWED_MUSIC_GENRES)),
         required = True
     )
     moviesTaste = fields.Integer(required = True, validate = validate.Range(min = 0, max = 10))
