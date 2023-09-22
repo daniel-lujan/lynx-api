@@ -27,7 +27,8 @@ def calculate():
     tree = KDTree(points, ignore_first_axis=True)
 
     for i, form_id in enumerate(all_forms):
-        bm_id = tree.nearest_neighbor(points[i]).point[0]
+        nn = tree.nearest_neighbor(points[i]).point
+        bm_id = nn[0]
         bm = {
             "name": all_forms[bm_id]["name"],
             "age": all_forms[bm_id]["age"],
@@ -38,7 +39,7 @@ def calculate():
             {
                 "_id": form_id,
                 "bestMatch": bm,
-                "perfectMatch": True,
+                "perfectMatch": tree.distance_sqr(points[i], nn) < 0.1,
                 "nearestEstablishment": {},
             }
         )
