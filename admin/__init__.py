@@ -1,6 +1,7 @@
 from flask import Blueprint
 
 import database as db
+from database.trees import motels, motels_tree
 from kdtree import KDTree
 from utils.calc import form_to_point
 
@@ -35,12 +36,25 @@ def calculate():
             "gender": all_forms[bm_id].get("gender", None),
         }
 
+        nearest_motel = motels_tree.nearest_neighbor(
+            [
+                None,
+                all_forms[bm_id]["mapPoint"]["lat"],
+                all_forms[bm_id]["mapPoint"]["lng"],
+            ]
+        ).point[0]
+
+        for m in motels:
+            if m["name"] == nearest_motel:
+                nearest_motel = m
+                break
+
         db.results.insert_one(
             {
                 "_id": form_id,
                 "bestMatch": bm,
-                "perfectMatch": tree.distance_sqr(points[i], nn) < 0.1,
-                "nearestEstablishment": {},
+                "perfectMatch": bool(tree.distance_sqr(points[i], nn) < 0.1),
+                "nearestEstablishment": nearest_motel,
             }
         )
 

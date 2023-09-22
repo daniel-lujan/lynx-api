@@ -31,3 +31,7 @@ def form_to_point(form_data: dict) -> list:
     # ...
 
     return point
+
+
+def motel_to_point(data: dict) -> list:
+    return [data["name"], data["location"]["lat"], data["location"]["lng"]]
