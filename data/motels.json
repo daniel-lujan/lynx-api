@@ -1,0 +1,119 @@
+[
+  {
+    "name": "3D Suite Motel Medell\u00edn",
+    "location": {
+      "lat": 6.258592999999999,
+      "lng": -75.585205
+    },
+    "rating": 4.5,
+    "address": "Cl. 51 #6947, Laureles - Estadio, Medell\u00edn"
+  },
+  {
+    "name": "Ibiza Motel Lounge",
+    "location": {
+      "lat": 6.1850146,
+      "lng": -75.58869109999999
+    },
+    "rating": 4.6,
+    "address": "Autopista Sur, Cra 42 #79-39, Medell\u00edn"
+  },
+  {
+    "name": "Motel Momentos Suites",
+    "location": {
+      "lat": 6.247057799999999,
+      "lng": -75.5681806
+    },
+    "rating": 4,
+    "address": "Cra. 49 #46-33, La Candelaria, Medell\u00edn"
+  },
+  {
+    "name": "Penthouse Motel",
+    "location": {
+      "lat": 6.277054199999999,
+      "lng": -75.6225895
+    },
+    "rating": 4.5,
+    "address": "115 - 51 Calle 63, V\u00eda Medell\u00edn San Pedro, Nazaret, Medell\u00edn"
+  },
+  {
+    "name": "Motel Jard\u00edn Medell\u00edn",
+    "location": {
+      "lat": 6.2683074,
+      "lng": -75.56314379999999
+    },
+    "rating": 4.2,
+    "address": "Cl. 73 #N\u00b0 51-93, Aranjuez, Medell\u00edn"
+  },
+  {
+    "name": "Motel D' lusso",
+    "location": {
+      "lat": 6.2579823,
+      "lng": -75.5846458
+    },
+    "rating": 4.3,
+    "address": "Colombia #68-38, Laureles - Estadio, Medell\u00edn"
+  },
+  {
+    "name": "Motel Collins",
+    "location": {
+      "lat": 6.2578718,
+      "lng": -75.58367799999999
+    },
+    "rating": 4.3,
+    "address": "Cl 50A #67 - 108, Laureles - Estadio, Medell\u00edn"
+  },
+  {
+    "name": "Motel Las Caba\u00f1as",
+    "location": {
+      "lat": 6.2138268,
+      "lng": -75.5739876
+    },
+    "rating": 4,
+    "address": "Cl. 14 #43 f 65, El Poblado, Medell\u00edn"
+  },
+  {
+    "name": "Motel Cupido",
+    "location": {
+      "lat": 6.2436222,
+      "lng": -75.5648305
+    },
+    "rating": 3.6,
+    "address": "Cl. 46 #4317, La Candelaria, Medell\u00edn"
+  },
+  {
+    "name": "Luxury la 33",
+    "location": {
+      "lat": 6.2390099,
+      "lng": -75.5888946
+    },
+    "rating": 3,
+    "address": "Av. 33 #66b-155, Medell\u00edn"
+  },
+  {
+    "name": "Thematic SUITES",
+    "location": {
+      "lat": 6.2582134,
+      "lng": -75.5843794
+    },
+    "rating": 4.3,
+    "address": "Cl. 51 #67B-27, Laureles - Estadio, Medell\u00edn"
+  },
+  {
+    "name": "Ibiza Motel Lounge",
+    "location": {
+      "lat": 6.1850146,
+      "lng": -75.58869109999999
+    },
+    "rating": 4.6,
+    "address": "Autopista Sur, Cra 42 #79-39, Medell\u00edn"
+  },
+  {
+    "name": "Motel Las Caba\u00f1as",
+    "location": {
+      "lat": 6.2138268,
+      "lng": -75.5739876
+    },
+    "rating": 4,
+    "address": "Cl. 14 #43 f 65, El Poblado, Medell\u00edn"
+  }
+]
