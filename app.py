@@ -4,6 +4,7 @@ if __name__ == "__main__":
     load_dotenv(".env.development")
 
 from flask import Flask, Response, request
+from flask_cors import CORS
 from pymongo.errors import DuplicateKeyError
 
 from admin import admin
@@ -15,6 +16,8 @@ from schemas.validator import validate_json
 app = Flask(__name__)
 
 app.register_blueprint(admin)
+
+CORS(app)
 
 
 @app.route("/form", methods=["POST"])
