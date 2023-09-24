@@ -14,7 +14,7 @@ class Form(Schema):
     moviesTaste = fields.Integer(required=True, validate=validate.Range(min=0, max=10))
     # ...
     mapPoint = fields.Dict(
-        fields.String(validate=validate.OneOf(("latitude", "altitude"))),
+        fields.String(validate=validate.OneOf(("lat", "lng"))),
         fields.Float(),
         required=True,
     )
