@@ -16,5 +16,6 @@ class Form(Schema):
     mapPoint = fields.Dict(
         fields.String(validate=validate.OneOf(("lat", "lng"))),
         fields.Float(),
+        validate=validate.Length(equal=2),
         required=True,
     )
