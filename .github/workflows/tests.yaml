@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     path:
-      - "tests/**"
-      - "kdtree/**"
+      - 'tests/**'
+      - 'kdtree/**'
   pull_request:
     branches: [main]
 
