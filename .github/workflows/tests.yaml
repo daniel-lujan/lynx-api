@@ -3,6 +3,9 @@ name: "Unit Tests"
 on:
   push:
     branches: [main]
+    path:
+      - "tests/**"
+      - "kdtree/**"
   pull_request:
     branches: [main]
 
