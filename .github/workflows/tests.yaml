@@ -1,0 +1,25 @@
+name: "Unit Tests"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  kd-tree:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: SetUp Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Create a Virtual Environment
+        run: python -m venv venv
+      - name: Activate the Virtual Environment
+        run: source venv/bin/activate
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
+      - name: Run Unit Tests
+        run: python -m unittest discover -s tests
