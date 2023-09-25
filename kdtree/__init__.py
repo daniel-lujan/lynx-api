@@ -94,7 +94,7 @@ class KDTree:
         else:
             return np.array_equal(a, b)
 
-    def nearest_neighbor(self, target: SupportsIndex) -> Node:
+    def nearest_neighbor(self, query: SupportsIndex) -> Node:
         best: Node = None
 
         def search(node: Node, depth: int = 0):
@@ -103,18 +103,18 @@ class KDTree:
             if node is None:
                 return
 
-            distance = self.distance_sqr(node.point, target)
+            distance = self.distance_sqr(node.point, query)
             best_distance = (
-                self.distance_sqr(best.point, target)
+                self.distance_sqr(best.point, query)
                 if best is not None
                 else float("inf")
             )
 
-            if distance < best_distance and not self.check_equal(node.point, target):
+            if distance < best_distance and not self.check_equal(node.point, query):
                 best = node
 
             axis = self.__get_axis(depth)
-            diff = target[axis] - node.point[axis]
+            diff = query[axis] - node.point[axis]
             if diff <= 0:
                 close, away = node.left, node.right
             else:
