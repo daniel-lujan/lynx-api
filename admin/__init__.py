@@ -49,13 +49,16 @@ def calculate():
                 nearest_motel = m
                 break
 
-        db.results.insert_one(
+        db.results.update_one(
+            {"_id": form_id},
             {
-                "_id": form_id,
-                "bestMatch": bm,
-                "perfectMatch": bool(tree.distance_sqr(points[i], nn) < 0.1),
-                "nearestEstablishment": nearest_motel,
-            }
+                "$set": {
+                    "bestMatch": bm,
+                    "perfectMatch": bool(tree.distance_sqr(points[i], nn) < 0.1),
+                    "nearestEstablishment": nearest_motel,
+                },
+            },
+            upsert=True,
         )
 
     return "OK"
