@@ -98,7 +98,7 @@ class KDTree:
         best: Node = None
         best_distance = float("inf")
 
-        def search(node: Node, depth: int = 0):
+        def search(node: Node):
             nonlocal best, best_distance
 
             if node is None:
@@ -111,16 +111,16 @@ class KDTree:
             
             best_distance = self.distance_sqr(best.point, query)
 
-            axis = self.__get_axis(depth)
+            axis = self.__get_axis(node.depth)
             diff = query[axis] - node.point[axis]
             if diff <= 0:
                 close, away = node.left, node.right
             else:
                 close, away = node.right, node.left
 
-            search(close, depth + 1)
+            search(close)
             if diff**2 < best_distance:
-                search(away, depth + 1)
+                search(away)
 
         search(self.root)
         return best
