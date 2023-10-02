@@ -29,7 +29,10 @@ def form_to_point(form_data: dict) -> list:
 
     del form_data["name"]
     del form_data["age"]
-    del form_data["gender"]
+    try:
+        del form_data["gender"]
+    except:
+        pass
     del form_data["mapPoint"]
 
     point.extend(one_hot_encode(form_data.pop("favMusicGenres"), ALLOWED_MUSIC_GENRES))
