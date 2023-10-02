@@ -9,7 +9,7 @@ from pymongo.errors import DuplicateKeyError
 
 from admin import admin
 from config import PORT
-from database import forms
+from database import forms, results
 from schemas import Form
 from schemas.validator import validate_json
 
@@ -59,6 +59,25 @@ def new_form():
 
     return Response(status=200)
 
+@app.route("/results/<email>", methods=["GET"])
+def get_results(email: str):
+    """Returns the results for an user.
+
+    Route Params:
+        `email`: The email of the user.
+
+    Responses:
+        200: Results retrieved successfully.
+        404: Results not found for the user.
+    """
+
+    r = results.find_one({"_id": email.lower()})
+
+    if r is None:
+        return Response(status=404)
+    
+    return r
+    
 
 if __name__ == "__main__":
     app.run(port=PORT, debug=True)
