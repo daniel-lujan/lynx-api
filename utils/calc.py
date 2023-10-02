@@ -1,6 +1,6 @@
 from typing import Iterable, Sized, Union
 
-from schemas.constants import ALLOWED_MUSIC_GENRES
+from schemas.constants import ALLOWED_MUSIC_GENRES, PERSON_CHARACTERISTICS
 
 
 def one_hot_encode(data: list, categories: Union[Sized, Iterable]) -> list:
@@ -23,12 +23,23 @@ def one_hot_encode(data: list, categories: Union[Sized, Iterable]) -> list:
 
 
 def form_to_point(form_data: dict) -> list:
-    point = []
+    form_data = form_data.copy()
 
-    point.append(form_data["_id"])
-    point += one_hot_encode(form_data["favMusicGenres"], ALLOWED_MUSIC_GENRES)
-    point.append(form_data["moviesTaste"])
-    # ...
+    point = [form_data.pop("_id")]
+
+    del form_data["name"]
+    del form_data["age"]
+    del form_data["gender"]
+    del form_data["mapPoint"]
+
+    point.extend(one_hot_encode(form_data.pop("favMusicGenres"), ALLOWED_MUSIC_GENRES))
+    point.extend(
+        one_hot_encode(form_data.pop("mostImportantAttr"), PERSON_CHARACTERISTICS)
+    )
+
+    point.extend(v for v in form_data.values())
+
+    print(point)
 
     return point
 
