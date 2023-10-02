@@ -42,8 +42,6 @@ def form_to_point(form_data: dict) -> list:
 
     point.extend(v for v in form_data.values())
 
-    print(point)
-
     return point
 
 
