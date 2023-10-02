@@ -20,6 +20,23 @@ app.register_blueprint(admin)
 CORS(app)
 
 
+@app.route("/form/<email>", methods=["GET"])
+def get_form(email: str):
+    """Returns a form by email.
+
+    Responses:
+        200: Form retrieved successfully.
+        404: Form not found.
+    """
+
+    form = forms.find_one({"_id": email.lower()})
+
+    if form is None:
+        return Response(status=404)
+
+    return form
+
+
 @app.route("/form", methods=["POST"])
 @validate_json(Form)
 def new_form():
