@@ -108,8 +108,7 @@ class KDTree:
 
             if distance < best_distance and not self.check_equal(node.point, query):
                 best = node
-            
-            best_distance = self.distance_sqr(best.point, query)
+                best_distance = distance
 
             axis = self.__get_axis(node.depth)
             diff = query[axis] - node.point[axis]
