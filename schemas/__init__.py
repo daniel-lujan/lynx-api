@@ -6,7 +6,7 @@ from schemas.constants import ALLOWED_MUSIC_GENRES, PERSON_CHARACTERISTICS
 class Form(Schema):
     email = fields.Email(required=True, validate=validate.Length(min=1, max=50))
     name = fields.String(required=True, validate=validate.Length(min=1, max=30))
-    age = fields.Integer(required=True, validate=validate.Range(min=1))
+    age = fields.Integer(required=True, validate=validate.Range(min=0))
     gender = fields.String(validate=validate.OneOf(("f", "m")))
     moviesTaste = fields.Integer(required=True, validate=validate.Range(min=0, max=10))
     concertsTaste = fields.Integer(
