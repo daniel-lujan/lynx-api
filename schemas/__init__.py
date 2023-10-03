@@ -14,7 +14,9 @@ class Form(Schema):
     )
     partiesTaste = fields.Integer(required=True, validate=validate.Range(min=0, max=10))
     favMusicGenres = fields.List(
-        fields.String(validate=validate.OneOf(ALLOWED_MUSIC_GENRES)), required=True
+        fields.String(validate=validate.OneOf(ALLOWED_MUSIC_GENRES)),
+        required=True,
+        validate=validate.Length(min=0, max=4),
     )
     mostImportantAttr = fields.String(validate=validate.OneOf(PERSON_CHARACTERISTICS))
     catsOrDogs = fields.Integer(required=True, validate=validate.OneOf((0, 1)))
