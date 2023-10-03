@@ -62,3 +62,17 @@ def calculate():
         )
 
     return "OK"
+
+
+@admin.route("/reset")
+def reset():
+    """Resets the database.
+
+    Responses:
+        200: Reset successfully.
+    """
+
+    db.forms.drop()
+    db.results.drop()
+
+    return "OK"
