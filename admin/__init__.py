@@ -1,12 +1,26 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 import database as db
+from config import ADMIN_TOKEN
 from database.trees import motels, motels_tree
 from kdtree import KDTree
 from utils.calc import form_to_point
 
 admin = Blueprint("admin", __name__, url_prefix="/admin")
 
+
+@admin.before_request
+def authenticate():
+    """Authenticates the request.
+
+    Responses:
+        401: Unauthorized.
+    """
+
+    token = request.args.get("token")
+
+    if token is None or token != ADMIN_TOKEN:
+        return "Unauthorized", 401
 
 @admin.route("/calculate")
 def calculate():
